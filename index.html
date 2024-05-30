@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskit</title>
+    <!-- Haetaan HTMX-koodi -->
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body>
+    <h1>
+        Taskilista
+    </h1>
+    <!-- Kun sivu ladataan, tehdään http-GET-kutsu osoitteeseen ./tasks.php.
+         Vastauksen sisältämä data sijoitetaan tämä saman <ul> -elementin sisään. -->
+    <ul id="tasks" hx-trigger="load" hx-get="./tasks.php" hx-swap="innerHTML"></ul>
+
+    <!-- Lomake uuden taskin lisäämiseen. Kun lomake lähetetään (submit), lähetetään
+         http-POST-kutsu osoitteeseen ./tasks.php. Vastauksen sisältämä data
+         sijoitetaan sen elementin sisään, jonka id on 'tasks', sen sisältämien
+         lapsielementtien jälkeen. -->
+    <form hx-post="./tasks.php" hx-target="#tasks" hx-swap="beforeend">
+        <input type="text" name="title">
+        <input type="text" name="description">
+        <input type="submit" value="Lisää">
+    </form>
+    <div class="output"></div>
+</body>
+</html>
